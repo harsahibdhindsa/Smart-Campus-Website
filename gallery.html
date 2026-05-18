@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campus Gallery — Takshashila University</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .gallery-filter {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+      justify-content: center;
+    }
+    .filter-btn {
+      padding: 0.5rem 1.3rem;
+      border: 1.5px solid rgba(0,0,0,0.12);
+      border-radius: 50px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-mid);
+      transition: var(--transition);
+    }
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+    }
+    .gallery-item {
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+    }
+    /* Override aspect-ratio for grid items with emoji placeholders */
+    .gal-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      color: rgba(255,255,255,0.7);
+    }
+    .gal-placeholder .p-icon { font-size: 3.5rem; }
+    .gal-placeholder .p-label {
+      font-size: 0.8rem;
+      font-family: 'DM Sans', sans-serif;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 0 1rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon" style="overflow:hidden;padding:0;">
+        <img src="images/logo.png" alt="TU Logo" style="width:100%;height:100%;object-fit:cover;border-radius:10px;" />
+      </div>
+      <div class="logo-text">
+        <span class="logo-name">Takshashila University</span>
+        <span class="logo-tagline">Excellence · Innovation · Legacy</span>
+      </div>
+    </div>
+    <nav id="main-nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="gallery.html" class="active">Gallery</a>
+      <a href="contact.html">Contact</a>
+      <a href="personality.html" class="nav-cta">Find Your Path</a>
+    </nav>
+    <div class="hamburger" id="hamburger-btn"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">Home</a><span>/</span><span>Gallery</span>
+  </div>
+  <h1>Campus <span style="color:var(--gold)">Gallery</span></h1>
+  <p>A visual journey through Takshashila University — our spaces, events, students and achievements.</p>
+</section>
+
+<section class="gallery-section">
+  <div class="gallery-inner">
+    <div class="gallery-filter">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="campus">Campus</button>
+      <button class="filter-btn" data-filter="labs">Labs &amp; Library</button>
+      <button class="filter-btn" data-filter="events">Events</button>
+      <button class="filter-btn" data-filter="sports">Sports</button>
+      <button class="filter-btn" data-filter="hostel">Hostel</button>
+      <button class="filter-btn" data-filter="clubs">Clubs</button>
+    </div>
+
+    <div class="gallery-grid" id="gallery-grid">
+
+      <!-- Row 1 -->
+      <div class="gallery-item wide" data-cat="campus">
+        <img src="images/gallery-campus-entrance.jpg" alt="Main Campus Entrance" style="width:100%;height:100%;object-fit:cover;" />
+        <div class="gallery-overlay">
+          <div><h4>Main Campus Entrance</h4><p>Sector 14 · Est. 1985</p></div>
+        </div>
+      </div>
+      <div class="gallery-item" data-cat="labs">
+        <img src="images/gallery-lab-biology.jpg" alt="Molecular Biology Lab" style="width:100%;height:100%;object-fit:cover;" />
+        <div class="gallery-overlay">
+          <div><h4>Molecular Biology Lab</h4><p>Research Centre</p></div>
+        </div>
+      </div>
+      <div class="gallery-item" data-cat="events">
+        <img src="images/gallery-utsav.jpg" alt="Utsav — Cultural Fest" style="width:100%;height:100%;object-fit:cover;" />
+        <div class="gallery-overlay">
+          <div><h4>Utsav — Cultural Fest</h4><p>Annual Event</p></div>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="gallery-item tall" data-cat="campus">
+        <img src="images/gallery-engineering-block.jpg" alt="Engineering Block" style="width:100%;height:100%;object-fit:cover;" />
+        <div class="gallery-overlay">
+          <div><h4>Engineering Block</h4><p>A Wing</p></div>
+        </div>
+      </div>
+      <div class="gallery-item" data-cat="sports">
+        <img src="images/gallery-pool.jpg" alt="Olympic Swimming Pool" style="width:100%;height:100%;object-fit:cover;" />
+        <div class="gallery-overlay">
+          <div><h4>Olympic Swimming Pool</h4><p>Sports Complex</p></div>
+        </div>
+      </div>
+      <div class="gallery-item" data-cat="hostel">
+        <img src="images/gallery-hostel-girls.jpg" alt="Girls' Hostel" style="width:100%;height:100%;object-fit:cover;" />
+        <div class="gallery-overlay">
+          <div><h4>Girls' Hostel</h4><p>Saraswati Bhavan</p></div>
+        </div>
+      </div>
+      <div class="gallery-item" data-cat="labs">
+        <img src="images/gallery-lab-robotics.jpg" alt="AI &amp; Robotics Lab" style="width:100%;height:100%;object-fit:cover;" />
+        <div class="gallery-overlay">
+          <div><h4>AI &amp; Robotics Lab</h4><p>Innovation Hub</p></div>
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="gallery-item" data-cat="events">
+        <img src="images/gallery-convocation.jpg" alt="Convocation 2024" style="width:100%;height:100%;object-fit:cover;" />
+        <div class="gallery-overlay">
+          <div><h4>Convocation 2024</h4><p>Annual Ceremony</p></div>
+        </div>
+      </div>
+      <div class="gallery-item wide" data-cat="campus">
+        <img src="images/gallery-green-campus.jpg" alt="Eco Zone &amp; Gardens" style="width:100%;height:100%;object-fit:cover;" />
+        <div class="gallery-overlay">
+          <div><h4>Eco Zone &amp; Gardens</h4><p>Sustainable Campus</p></div>
+        </div>
+      </div>
+      <div class="gallery-item" data-cat="clubs">
+        <img src="images/gallery-painting.jpg" alt="Painting Club Exhibition" style="width:100%;height:100%;object-fit:cover;" />
+        <div class="gallery-overlay">
+          <div><h4>Painting Club Exhibition</h4><p>Annual Art Show</p></div>
+        </div>
+      </div>
+
+      <!-- Row 4 -->
+      <div class="gallery-item" data-cat="sports">
+        <img src="images/gallery-cricket.jpg" alt="Cricket Ground" style="width:100%;height:100%;object-fit:cover;" />
+        <div class="gallery-overlay">
+          <div><h4>Cricket Ground</h4><p>Sports Complex</p></div>
+        </div>
+      </div>
+      <div class="gallery-item" data-cat="labs">
+        <img src="images/gallery-library.jpg" alt="Central Library" style="width:100%;height:100%;object-fit:cover;" />
+        <div class="gallery-overlay">
+          <div><h4>Central Library</h4><p>Reading Hall</p></div>
+        </div>
+      </div>
+      <div class="gallery-item" data-cat="events">
+        <img src="images/gallery-techfest.jpg" alt="TechFest 2024" style="width:100%;height:100%;object-fit:cover;" />
+        <div class="gallery-overlay">
+          <div><h4>TechFest 2024</h4><p>Innovation Expo</p></div>
+        </div>
+      </div>
+      <div class="gallery-item" data-cat="hostel">
+        <img src="images/gallery-hostel-room.jpg" alt="Boys' Hostel" style="width:100%;height:100%;object-fit:cover;" />
+        <div class="gallery-overlay">
+          <div><h4>Boys' Hostel</h4><p>AC Double Room</p></div>
+        </div>
+      </div>
+
+      <!-- Row 5 -->
+      <div class="gallery-item wide" data-cat="events">
+        <img src="images/gallery-drama.jpg" alt="Drama Society Annual Play" style="width:100%;height:100%;object-fit:cover;" />
+        <div class="gallery-overlay">
+          <div><h4>Drama Society Annual Play</h4><p>Cultural Events</p></div>
+        </div>
+      </div>
+      <div class="gallery-item" data-cat="clubs">
+        <img src="images/gallery-dance.jpg" alt="Dance Club — Natyam" style="width:100%;height:100%;object-fit:cover;" />
+        <div class="gallery-overlay">
+          <div><h4>Dance Club — Natyam</h4><p>Student Clubs</p></div>
+        </div>
+      </div>
+      <div class="gallery-item" data-cat="campus">
+        <img src="images/gallery-cafe.jpg" alt="Campus Café" style="width:100%;height:100%;object-fit:cover;" />
+        <div class="gallery-overlay">
+          <div><h4>Campus Café</h4><p>Food &amp; Dining</p></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo"><div class="logo-icon" style="overflow:hidden;padding:0;">
+        <img src="images/logo.png" alt="TU Logo" style="width:100%;height:100%;object-fit:cover;border-radius:10px;" />
+      </div><div class="logo-text"><span class="logo-name">Takshashila University</span></div></div>
+      <p>Empowering generations since 1985.</p>
+      <div class="footer-slogan">"Learning Without Limits, Growing Without Boundaries"</div>
+    </div>
+    <div class="footer-col"><h5>Quick Links</h5><ul>
+      <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+      <li><a href="services.html">Programs</a></li><li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Explore</h5><ul>
+      <li><a href="services.html#facilities">Campus Facilities</a></li>
+      <li><a href="services.html#clubs">Student Clubs</a></li>
+      <li><a href="services.html#scholarship">Scholarships</a></li>
+      <li><a href="personality.html">Personality Test</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Contact</h5><ul>
+      <li><a href="#">📍 Sector 14, City</a></li>
+      <li><a href="tel:+911234567890">📞 +91 12345 67890</a></li>
+      <li><a href="/cdn-cgi/l/email-protection#e48d8a828ba49789859690878589949197ca818091">✉ <span class="__cf_email__" data-cfemail="71181f171e31021c10030512101c0104025f141504">[email&#160;protected]</span></a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Takshashila University. All rights reserved.</span>
+    <span>NAAC A++ · UGC Approved · NIRF Ranked #3</span>
+  </div>
+</footer>
+
+
+  function toggleNav() { document.getElementById('main-nav').classList.toggle('open'); }
+
+  function filterGallery(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    docume
+</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

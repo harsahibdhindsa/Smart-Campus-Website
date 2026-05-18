@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Find Your Path — Takshashila University</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .step-section { display: none; }
+    .step-section.active { display: block; animation: fadeInUp 0.4s ease; }
+    .progress-bar {
+      background: rgba(0,0,0,0.1);
+      border-radius: 50px;
+      height: 6px;
+      margin-bottom: 2rem;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      border-radius: 50px;
+      transition: width 0.5s ease;
+    }
+    .nav-btns { display: flex; gap: 1rem; margin-top: 2rem; }
+    .btn-back {
+      background: transparent;
+      border: 1.5px solid rgba(0,0,0,0.15);
+      color: var(--text-mid);
+      padding: 0.75rem 1.8rem;
+      border-radius: 50px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .btn-back:hover { border-color: var(--navy); color: var(--navy); }
+    .btn-next {
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      flex: 1;
+    }
+    .btn-next:hover { background: var(--gold); color: var(--navy); }
+    .trait-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .trait-pill {
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+    .trait-creative { background: rgba(139,92,246,0.15); color: #7c3aed; }
+    .trait-analytical { background: rgba(59,130,246,0.15); color: #1d4ed8; }
+    .trait-social { background: rgba(236,72,153,0.15); color: #be185d; }
+    .trait-leader { background: rgba(245,158,11,0.15); color: #b45309; }
+    .trait-explorer { background: rgba(16,185,129,0.15); color: #047857; }
+    .friend-profile {
+      background: var(--cream);
+      border-radius: var(--radius);
+      padding: 1rem 1.2rem;
+      margin-top: 1.5rem;
+      border: 1px solid rgba(0,0,0,0.07);
+    }
+    .friend-profile h5 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.8rem;
+    }
+    .compatibility-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      font-size: 0.9rem;
+    }
+    .compat-bar {
+      flex: 1;
+      height: 6px;
+      background: rgba(0,0,0,0.08);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .compat-fill { height: 100%; background: var(--gold); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">SC</div>
+      <div class="logo-text">
+        <span class="logo-name">Takshashila University</span>
+        <span class="logo-tagline">Excellence · Innovation · Legacy</span>
+      </div>
+    </div>
+    <nav id="main-nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+      <a href="personality.html" class="nav-cta active">Find Your Path</a>
+    </nav>
+    <div class="hamburger" id="hamburger-btn"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">Home</a><span>/</span><span>Find Your Path</span>
+  </div>
+  <h1>Discover Your <span style="color:var(--gold)">Personality</span></h1>
+  <p>Answer a few questions to discover the perfect course, clubs and friends for your university journey.</p>
+</section>
+
+<section class="personality-section">
+  <div class="personality-inner">
+    <div class="personality-form-wrap">
+
+      <!-- Progress -->
+      <div class="step-indicator" id="step-dots">
+        <div class="step-dot active" id="dot-1"></div>
+        <div class="step-dot" id="dot-2"></div>
+        <div class="step-dot" id="dot-3"></div>
+        <div class="step-dot" id="dot-4"></div>
+        <div class="step-dot" id="dot-5"></div>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill" style="width:20%"></div>
+      </div>
+
+      <!-- STEP 1 — Basic Info -->
+      <div class="step-section active" id="step-1">
+        <h2 class="section-title">About <span>You</span></h2>
+        <p>Let's start with the basics. This helps personalise your experience.</p>
+        <div style="margin-top:1.5rem">
+          <div class="form-group">
+            <label>Your Full Name</label>
+            <input type="text" id="p-name" placeholder="e.g. Priya Sharma" />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Age</label>
+              <input type="number" id="p-age" placeholder="e.g. 17" min="14" max="30" />
+            </div>
+            <div class="form-group">
+              <label>City / State</label>
+              <input type="text" id="p-city" placeholder="e.g. Chandigarh, Punjab" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Which stream are you from?</label>
+            <select id="p-stream">
+              <option value="">— Select —</option>
+              <option>Science (PCM)</option>
+              <option>Science (PCB)</option>
+              <option>Science (PCMB)</option>
+              <option>Commerce</option>
+              <option>Arts / Humanities</option>
+              <option>Vocational</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Class 12 Percentage (or expected)</label>
+            <select id="p-percent">
+              <option value="">— Select Range —</option>
+              <option>95% and above</option>
+              <option>85% – 94%</option>
+              <option>75% – 84%</option>
+              <option>60% – 74%</option>
+              <option>Below 60%</option>
+            </select>
+          </div>
+        </div>
+        <div class="nav-btns">
+          <button class="btn-next" data-next="1">Next — Interests →</button>
+        </div>
+      </div>
+
+      <!-- STEP 2 — Interests -->
+      <div class="step-section" id="step-2">
+        <h2 class="section-title">Your <span>Interests</span></h2>
+        <p>Select everything that excites you — don't overthink it!</p>
+        <div class="question-group" style="margin-top:1.5rem">
+          <h4>Which of these activities do you enjoy most? (Pick all that apply)</h4>
+          <div class="checkbox-options">
+            <label class="checkbox-option"><input type="checkbox" name="interest" value="coding"> <span>💻 Coding / Building apps</span></label>
+            <label class="checkbox-option"><input type="checkbox" name="interest" value="art"> <span>🎨 Drawing / Painting / Design</span></label>
+            <label class="checkbox-option"><input type="checkbox" name="interest" value="music"> <span>🎸 Music / Singing</span></label>
+            <label class="checkbox-option"><input type="checkbox" name="interest" value="science"> <span>🔬 Science experiments</span></label>
+            <label class="checkbox-option"><input type="checkbox" name="interest" value="sports"> <span>⚽ Sports / Fitness</span></label>
+            <label class="checkbox-option"><input type="checkbox" name="interest" value="writing"> <span>✍️ Writing / Poetry</span></label>
+            <label class="checkbox-option"><input type="checkbox" name="interest" value="business"> <span>📊 Business / Entrepreneurship</span></label>
+            <label class="checkbox-option"><input type="checkbox" name="interest" value="medicine"> <span>🩺 Helping / Healing people</span></label>
+            <label class="checkbox-option"><input type="checkbox" name="interest" value="dance"> <span>💃 Dancing / Performing</span></label>
+            <label class="checkbox-option"><input type="checkbox" name="interest" value="nature"> <span>🌿 Nature / Environment</span></label>
+            <label class="checkbox-option"><input type="checkbox" name="interest" value="law"> <span>⚖️ Law / Justice / Debate</span></label>
+            <label class="checkbox-option"><input type="checkbox" name="interest" value="travel"> <span>✈️ Travel / Exploring</span></label>
+          </div>
+        </div>
+        <div class="nav-btns">
+          <button class="btn-back" data-prev="2">← Back</button>
+          <button class="btn-next" data-next="2">Next — Personality →</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 — Personality -->
+      <div class="step-section" id="step-3">
+        <h2 class="section-title">Your <span>Personality</span></h2>
+        <p>These questions help us understand how you think and interact with the world.</p>
+        <div style="margin-top:1.5rem">
+          <div class="question-group">
+            <h4>1. In a group project, you prefer to be the...</h4>
+            <div class="radio-options">
+              <label class="radio-option"><input type="radio" name="role" value="leader"> <span>🎯 Leader — organising and directing</span></label>
+              <label class="radio-option"><input type="radio" name="role" value="creative"> <span>💡 Creative — coming up with fresh ideas</span></label>
+              <label class="radio-option"><input type="radio" name="role" value="analyst"> <span>🔍 Analyst — researching and checking facts</span></label>
+              <label class="radio-option"><input type="radio" name="role" value="supporter"> <span>🤝 Supporter — helping everyone get along</span></label>
+            </div>
+          </div>
+          <div class="question-group">
+            <h4>2. Your ideal weekend involves...</h4>
+            <div class="radio-options">
+              <label class="radio-option"><input type="radio" name="weekend" value="social"> <span>🎉 Hanging out with lots of people</span></label>
+              <label class="radio-option"><input type="radio" name="weekend" value="solo"> <span>📖 Reading, creating, or learning something new</span></label>
+              <label class="radio-option"><input type="radio" name="weekend" value="adventure"> <span>🏕️ Going on an outdoor adventure</span></label>
+              <label class="radio-option"><input type="radio" name="weekend" value="chill"> <span>🎮 Relaxing at home with games or movies</span></label>
+            </div>
+          </div>
+          <div class="question-group">
+            <h4>3. When facing a difficult problem, you...</h4>
+            <div class="radio-options">
+              <label class="radio-option"><input type="radio" name="problem" value="logical"> <span>🧠 Analyze it logically, step-by-step</span></label>
+              <label class="radio-option"><input type="radio" name="problem" value="intuitive"> <span>✨ Go with your gut / creative instinct</span></label>
+              <label class="radio-option"><input type="radio" name="problem" value="social"> <span>👥 Ask friends and brainstorm together</span></label>
+              <label class="radio-option"><input type="radio" name="problem" value="research"> <span>🔎 Research extensively before acting</span></label>
+            </div>
+          </div>
+        </div>
+        <div class="nav-btns">
+          <button class="btn-back" data-prev="3">← Back</button>
+          <button class="btn-next" data-next="3">Next — Goals →</button>
+        </div>
+      </div>
+
+      <!-- STEP 4 — Career Goals -->
+      <div class="step-section" id="step-4">
+        <h2 class="section-title">Your <span>Goals</span></h2>
+        <p>Tell us where you see yourself in 10 years — we'll align your path accordingly.</p>
+        <div style="margin-top:1.5rem">
+          <div class="question-group">
+            <h4>What is your primary career aspiration?</h4>
+            <div class="radio-options">
+              <label class="radio-option"><input type="radio" name="goal" value="tech"> <span>🚀 Build technology / software products</span></label>
+              <label class="radio-option"><input type="radio" name="goal" value="health"> <span>🏥 Work in healthcare / help people heal</span></label>
+              <label class="radio-option"><input type="radio" name="goal" value="business"> <span>💼 Run my own business / become an entrepreneur</span></label>
+              <label class="radio-option"><input type="radio" name="goal" value="law"> <span>⚖️ Work in law, policy or government</span></label>
+              <label class="radio-option"><input type="radio" name="goal" value="arts"> <span>🎭 Pursue art, design, media or entertainment</span></label>
+              <label class="radio-option"><input type="radio" name="goal" value="research"> <span>🔬 Do groundbreaking research / academia</span></label>
+            </div>
+          </div>
+          <div class="question-group">
+            <h4>What matters most to you in a career?</h4>
+            <div class="radio-options">
+              <label class="radio-option"><input type="radio" name="value" value="money"> <span>💰 High salary and financial security</span></label>
+              <label class="radio-option"><input type="radio" name="value" value="impact"> <span>🌍 Making a positive impact on society</span></label>
+              <label class="radio-option"><input type="radio" name="value" value="passion"> <span>❤️ Doing what I'm truly passionate about</span></label>
+              <label class="radio-option"><input type="radio" name="value" value="growth"> <span>📈 Continuous learning and growth</span></label>
+            </div>
+          </div>
+        </div>
+        <div class="nav-btns">
+          <button class="btn-back" data-prev="4">← Back</button>
+          <button class="btn-next" data-next="4">Next — Social Style →</button>
+        </div>
+      </div>
+
+      <!-- STEP 5 — Social Style -->
+      <div class="step-section" id="step-5">
+        <h2 class="section-title">Social <span>Style</span></h2>
+        <p>Help us understand how you connect with others — this builds your friendship profile!</p>
+        <div style="margin-top:1.5rem">
+          <div class="question-group">
+            <h4>In social settings, you are usually...</h4>
+            <div class="radio-options">
+              <label class="radio-option"><input type="radio" name="social" value="extrovert"> <span>😄 The life of the party — very outgoing</span></label>
+              <label class="radio-option"><input type="radio" name="social" value="ambivert"> <span>😊 Comfortable in groups but value alone time too</span></label>
+              <label class="radio-option"><input type="radio" name="social" value="introvert"> <span>🧘 Prefer small groups or one-on-one conversations</span></label>
+            </div>
+          </div>
+          <div class="question-group">
+            <h4>Describe your communication style:</h4>
+            <div class="radio-options">
+              <label class="radio-option"><input type="radio" name="comm" value="direct"> <span>💬 Direct and straightforward</span></label>
+              <label class="radio-option"><input type="radio" name="comm" value="thoughtful"> <span>🤔 Thoughtful — I think before I speak</span></label>
+              <label class="radio-option"><input type="radio" name="comm" value="expressive"> <span>🎤 Very expressive and animated</span></label>
+              <label class="radio-option"><input type="radio" name="comm" value="listener"> <span>👂 I prefer listening and asking questions</span></label>
+            </div>
+          </div>
+        </div>
+        <div class="nav-btns">
+          <button class="btn-back" data-prev="5">← Back</button>
+          <button class="btn-next" id="show-result-btn">🔍 Reveal My Profile →</button>
+        </div>
+      </div>
+
+      <!-- RESULT -->
+      <div id="result-section" style="display:none;animation:fadeInUp 0.6s ease">
+        <div class="result-box show" id="result-box">
+          <div class="result-emoji" id="result-emoji">🌟</div>
+          <h3 id="result-type">The Innovator</h3>
+          <p id="result-desc">You're a creative problem-solver who thrives at the intersection of technology and imagination.</p>
+          <div class="result-clubs" id="result-clubs"></div>
+        </div>
+
+        <div style="margin-top:2rem;padding:1.5rem;background:var(--cream);border-radius:var(--radius-lg);border:1px solid rgba(0,0,0,0.07)">
+          <h4 style="font-size:1.1rem;color:var(--navy);margin-bottom:1rem">🎓 Recommended Courses for You</h4>
+          <div id="result-courses" style="display:flex;flex-direction:column;gap:0.6rem"></div>
+        </div>
+
+        <div class="friend-profile">
+          <h5>Your Compatibility Profile (for making friends)</h5>
+          <div id="friend-compat"></div>
+        </div>
+
+        <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap">
+          <a href="contact.html" class="btn btn-navy" style="display:inline-flex">📋 Apply Now →</a>
+          <button class="btn-back" id="reset-btn" style="padding:0.75rem 1.8rem">🔄 Retake Test</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo"><div class="logo-icon">SC</div><div class="logo-text"><span class="logo-name">Takshashila University</span></div></div>
+      <p>Empowering generations since 1985.</p>
+      <div class="footer-slogan">"Learning Without Limits, Growing Without Boundaries"</div>
+    </div>
+    <div class="footer-col"><h5>Quick Links</h5><ul>
+      <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+      <li><a href="services.html">Programs</a></li><li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Discover</h5><ul>
+      <li><a href="services.html#clubs">Student Clubs</a></li>
+      <li><a href="services.html#scholarship">Scholarships</a></li>
+      <li><a href="services.html#admission">Admission Dates</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Contact</h5><ul>
+      <li><a href="#">📍 Sector 14, City</a></li>
+      <li><a href="tel:+911234567890">📞 +91 12345 67890</a></li>
+      <li><a href="/cdn-cgi/l/email-protection#c1a8afa7ae81b2aca0b3b5a2a0acb1b4b2efa4a5b4">✉ <span class="__cf_email__" data-cfemail="fb92959d94bb88969a898f989a968b8e88d59e9f8e">[email&#160;protected]</span></a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Takshashila University. All rights reserved.</span>
+    <span>NAAC A++ · UGC Approved · NIRF Ranked #3</span>
+  </div>
+</footer>
+
+
+
+  <script src="script.js"></script>
+</body>
+</html>
